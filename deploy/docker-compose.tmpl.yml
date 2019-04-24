@@ -48,7 +48,3 @@ networks:
   traefik-net:
     name: ${TRAEFIK_NET_NAME:-traefik-net}
     external: true
-
-volumes:
-  pgadmin-vol:
-    name: ${PGADMIN_VOL_NAME:-pgadmin-vol}
