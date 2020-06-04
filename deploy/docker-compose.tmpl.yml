@@ -14,7 +14,6 @@ services:
       MAIL_PASSWORD:
     networks:
       postgres-net:
-      postgres-vessel-net:
       traefik-net:
     volumes:
       - pgadmin-vol:/data
