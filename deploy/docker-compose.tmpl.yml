@@ -2,16 +2,16 @@ version: '3.5'
 
 services:
   pgadmin:
-    image: ${IMAGE_NAME:-chorss/docker-pgadmin4}:${IMAGE_TAG:-latest}
+    image: ${IMAGE_NAME:-dpage/pgadmin4}:${IMAGE_TAG:-latest}
     environment:
-      SERVER_MODE:
-      PGADMIN_SETUP_EMAIL:
-      PGADMIN_SETUP_PASSWORD:
-      MAIL_SERVER:
-      MAIL_PORT:
-      MAIL_USE_TLS:
-      MAIL_USER:
-      MAIL_PASSWORD:
+      PGADMIN_LISTEN_PORT:
+      PGADMIN_DEFAULT_EMAIL:
+      PGADMIN_DEFAULT_PASSWORD:
+      PGADMIN_CONFIG_MAIL_SERVER:
+      PGADMIN_CONFIG_MAIL_PORT:
+      PGADMIN_CONFIG_MAIL_USE_TLS:
+      PGADMIN_CONFIG_MAIL_USER:
+      PGADMIN_CONFIG_MAIL_PASSWORD:
     networks:
       postgres-net:
       traefik-net:
@@ -21,13 +21,13 @@ services:
       mode: replicated
       replicas: ${REPLICAS:-1}
       labels:
-        traefik.frontend.rule: Host:pgadmin.${PUBLIC_HOSTNAME}
+        traefik.frontend.rule: Host:${TRAEFIK_SUBDOMAIN:-pgadmin}.${PUBLIC_HOSTNAME}
         traefik.backend: pgadmin
-        traefik.port: '${PGADMIN_PORT}'
+        traefik.port: '${PGADMIN_LISTEN_PORT}'
       restart_policy:
-        delay: ${RESTART_DELAY:-30s}
+        delay: ${RESTART_DELAY:-15s}
       update_config:
-        delay: ${UPDATE_DELAY:-2m}
+        delay: ${UPDATE_DELAY:-1m}
       resources:
         limits:
           cpus: '${RESOURCES_LIMITS_CPUS:-0.5}'
