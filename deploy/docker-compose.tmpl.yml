@@ -18,7 +18,7 @@ services:
       postgres-net:
       traefik-net:
     volumes:
-      - pgadmin-vol:/data
+      - pgadmin-vol:/var/lib/pgadmin
     deploy:
       mode: replicated
       replicas: ${REPLICAS:-1}
