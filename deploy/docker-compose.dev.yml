@@ -1,12 +1,10 @@
 version: '3.5'
 
-services:
-  pgadmin:
-    deploy:
-      placement:
-        constraints:
-          - node.hostname == ${PLACEMENT_CONSTRAINTS_NODE_HOSTNAME:-hostname}
-
 volumes:
   pgadmin-vol:
     name: ${PGADMIN_VOL_NAME}
+    driver: local
+    driver_opts:
+      type: ${PGADMIN_VOL_TYPE:-nfs4}
+      o: addr=${PGADMIN_VOL_ADDR:-127.0.0.1},${PGADMIN_VOL_OPTIONS:-rw,nolock,noatime,tcp,rsize=8192,wsize=8192,timeo=14}
+      device: ${PGADMIN_VOL_DEVICE:-:/pgadmin-vol/}
