@@ -7,6 +7,7 @@ services:
       PGADMIN_LISTEN_PORT:
       PGADMIN_DEFAULT_EMAIL:
       PGADMIN_DEFAULT_PASSWORD:
+      PGADMIN_DISABLE_POSTFIX:
       PGADMIN_CONFIG_MAIL_SERVER: '''${PGADMIN_CONFIG_MAIL_SERVER}'''
       PGADMIN_CONFIG_MAIL_PORT:
       PGADMIN_CONFIG_MAIL_USE_SSL:
@@ -32,11 +33,11 @@ services:
         delay: ${UPDATE_DELAY:-1m}
       resources:
         limits:
-          cpus: '${RESOURCES_LIMITS_CPUS:-0.5}'
-          memory: ${RESOURCES_LIMITS_MEMORY:-128M}
+          cpus: '${RESOURCES_LIMITS_CPUS:-1}'
+          memory: ${RESOURCES_LIMITS_MEMORY:-256M}
         reservations:
           cpus: '${RESOURCES_RESERVATIONS_CPUS:-0.001}'
-          memory: ${RESOURCES_RESERVATIONS_MEMORY:-103M}
+          memory: ${RESOURCES_RESERVATIONS_MEMORY:-128M}
 
 networks:
   postgres-net:
