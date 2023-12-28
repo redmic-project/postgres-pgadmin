@@ -23,14 +23,15 @@ services:
     deploy:
       mode: replicated
       replicas: ${REPLICAS:-1}
-      labels:
-        traefik.frontend.rule: Host:${TRAEFIK_SUBDOMAIN:-pgadmin}.${PUBLIC_HOSTNAME}
-        traefik.backend: pgadmin
-        traefik.port: '${PGADMIN_LISTEN_PORT}'
       restart_policy:
         delay: ${RESTART_DELAY:-15s}
       update_config:
         delay: ${UPDATE_DELAY:-1m}
+      labels:
+        traefik.enable: ${TRAEFIK_ENABLE:-true}
+        traefik.http.routers.pgadmin.entrypoints: ${TRAEFIK_ENTRYPOINT:-http}
+        traefik.http.routers.pgadmin.rule: Host(`${TRAEFIK_SUBDOMAIN:-pgadmin}.${PUBLIC_HOSTNAME}`)
+        traefik.http.services.pgadmin.loadbalancer.server.port: ${PGADMIN_LISTEN_PORT}
       resources:
         limits:
           cpus: '${RESOURCES_LIMITS_CPUS:-1}'
