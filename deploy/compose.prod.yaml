@@ -1,6 +1,6 @@
 volumes:
   pgadmin-vol:
-    name: ${PGADMIN_VOL_NAME}
+    name: ${PGADMIN_VOL_NAME:-pgadmin-vol}
     driver: 'cloudstor:aws'
     driver_opts:
       backing: shared
