@@ -1,8 +1,8 @@
 volumes:
   pgadmin-vol:
     name: ${PGADMIN_VOL_NAME}
-    driver: ${VOL_DRIVER:-local}
+    driver: ${VOL_DRIVER}
     driver_opts:
-      type: ${VOL_TYPE:-nfs4}
-      o: addr=${VOL_ADDR:-127.0.0.1},${VOL_OPTS:-rw,nolock,noatime,tcp,rsize=8192,wsize=8192,timeo=14}
-      device: ${PGADMIN_VOL_DEVICE:-:/pgadmin-vol/}
+      type: ${VOL_TYPE}
+      o: addr=${VOL_ADDR},vers=${VOL_VERS},${VOL_OPTS}
+      device: :${VOL_DEVICE_PREFIX}${PGADMIN_VOL_DEVICE:-/pgadmin-vol/}
