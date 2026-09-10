@@ -23,7 +23,7 @@ services:
       interval: ${HEALTHCHECK_INTERVAL:-30s}
       timeout: ${HEALTHCHECK_TIMEOUT:-10s}
       retries: ${HEALTHCHECK_RETRIES:-5}
-      start_period: ${HEALTHCHECK_START_PERIOD:-2m}
+      start_period: ${HEALTHCHECK_START_PERIOD:-1m}
     deploy:
       mode: replicated
       replicas: ${REPLICAS:-1}
