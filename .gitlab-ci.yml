@@ -6,9 +6,6 @@ include:
     ref: main
     file: '/deploy/service/docker-deploy.yml'
 
-stages:
-  - deploy
-
-.deploy:
+.docker-deploy:
   variables:
     STACK: postgres
