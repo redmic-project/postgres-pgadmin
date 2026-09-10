@@ -18,6 +18,12 @@ services:
       traefik-net:
     volumes:
       - pgadmin-vol:/var/lib/pgadmin
+    healthcheck:
+      test: wget --spider -q http://127.0.0.1:${PGADMIN_LISTEN_PORT}/misc/ping
+      interval: ${HEALTHCHECK_INTERVAL:-30s}
+      timeout: ${HEALTHCHECK_TIMEOUT:-10s}
+      retries: ${HEALTHCHECK_RETRIES:-5}
+      start_period: ${HEALTHCHECK_START_PERIOD:-1m}
     deploy:
       mode: replicated
       replicas: ${REPLICAS:-1}
